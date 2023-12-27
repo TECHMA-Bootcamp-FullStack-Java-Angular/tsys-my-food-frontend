@@ -1,6 +1,4 @@
 
-
-
 main{
   background-image: url('../../../../assets/img/fondo.png');
   height: 100%;
@@ -8,7 +6,6 @@ main{
   padding: 0;
   margin: 0;
 }
-
 
 
 .carousel-item{
