@@ -2,13 +2,13 @@
 
 # MyFood Frontend Documentation
 This project is the frontend for MyFood, an application for food reservation.
-Here is the [URL](https://dev.d188cfs70v7rq4.amplifyapp.com/).
+Here is the [URL](https://main.d37mwpdi1yyb3d.amplifyapp.com/).
 ## Routes
 
 ### Home Page
 
 - **/**: Home page.
-- **/about**: Information page about the [Team](https://dev.d188cfs70v7rq4.amplifyapp.com/about).
+- **/about**: Information page about the [Team](https://main.d37mwpdi1yyb3d.amplifyapp.com/about).
 - **/login**: Login page.
 - **/register**: Registration page.
 
