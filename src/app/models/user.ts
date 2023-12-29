@@ -55,4 +55,18 @@ export class UserDTO implements User {
 
 }
 
+export interface ApiResponse {
+  content: any[];
+  pageable: any;
+  last: boolean;
+  totalElements: number;
+  totalPages: number;
+  size: number;
+  number: number;
+  sort: any;
+  first: boolean;
+  numberOfElements: number;
+  empty: boolean;
+}
+
 

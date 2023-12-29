@@ -2,11 +2,14 @@ import { Component, ElementRef, ViewChild, inject } from '@angular/core';
 import { Chart, ChartType } from 'chart.js/auto';
 import { SlotsDbService } from '../../../services/slots-db.service';
 import { Slot } from '../../../models/slots';
+import { MenusDbService } from '../../../services/menus-db.service';
+import { UserDbService } from '../../../services/user-db.service';
+import {MatIconModule} from '@angular/material/icon';
 
 @Component({
   selector: 'app-bar-chart',
   standalone: true,
-  imports: [],
+  imports: [MatIconModule],
   templateUrl: './bar-chart.component.html',
   styleUrl: './bar-chart.component.css',
 })
@@ -14,13 +17,41 @@ export class BarChartComponent {
   @ViewChild('slotChart') Chart: ElementRef | undefined;
 
   slotsDbService = inject(SlotsDbService);
+  menusDbService = inject(MenusDbService);
+  userDbService = inject(UserDbService);
+
+
   slots: Slot[] = [];
 
   timeArray: string[] = [];
   limitSlotArray: number[] = [];
   actualArray: number[] = [];
 
+  numUsers: number = 0;
+  numDihses: number = 0;
+  numMenus: number = 0;
+
   ngOnInit(): void {
+
+    this.menusDbService.getMenus().subscribe({
+      next: (data) => {
+        this.numMenus = data.length;
+      },
+    });
+
+    this.slotsDbService.getSlots().subscribe({
+      next: (data) => {
+        this.numDihses = data.length;
+      },
+    });
+
+    this.userDbService.getUsersAll().subscribe({
+      next: (ApiResponse) => {
+
+        console.log(ApiResponse);
+        this.numUsers = ApiResponse.totalElements;
+      },
+    });
 
     this.loadSlots();
 

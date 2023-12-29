@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { UserDTO } from '../models/user';
+import { ApiResponse, User, UserDTO } from '../models/user';
 import Swal from 'sweetalert2';
 
 export interface UserforAdmin {
@@ -15,7 +15,7 @@ export interface UserforAdmin {
   providedIn: 'root'
 })
 export class UserDbService {
-  
+
 
   private url = environment.apiUrl + '/api/v1/users';
   private url2 = environment.apiUrl + '/api/v1/user';
@@ -23,7 +23,7 @@ export class UserDbService {
   private usersApi: UserforAdmin[] = []
 
   private userSubject = new BehaviorSubject<UserforAdmin[]>(this.usersApi);
-  
+
   constructor(private http: HttpClient) { }
 
   getUsers(num1:number,num2:number): Observable<UserforAdmin[]> {
@@ -42,7 +42,7 @@ export class UserDbService {
         "chef": "Chef",
         "user": "User"
       };
-  
+
       Swal.fire({
         title: "Select role",
         input: "select",
@@ -62,7 +62,7 @@ export class UserDbService {
         if (result.isConfirmed) {
           const selectedRole = result.value;
           let roleId: number;
-  
+
           switch (selectedRole) {
             case 'user':
               roleId = 3;
@@ -76,10 +76,10 @@ export class UserDbService {
             default:
               roleId = 1;
           }
-  
+
           user.role.name = selectedRole.toUpperCase();
           user.role.id = roleId;
-  
+
           this.http.put(this.url2 + "/" + userId, user, { headers: { 'Content-Type': 'application/json' } })
             .subscribe(
               () => {
@@ -96,6 +96,10 @@ export class UserDbService {
 
   getTotalUsersCount(): number {
     return this.usersApi.length;
+  }
+
+  getUsersAll() {
+    return this.http.get<ApiResponse>(this.url);
   }
 
 }
