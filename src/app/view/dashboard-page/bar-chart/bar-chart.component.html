@@ -3,8 +3,22 @@
   <div class="row">
     <div class="col-md-4">
       <div class="card shadow p-3">
+        <h2 class="text-center">No. de Ordres for today</h2>
+        <div class="mx-auto m-0 p-0">
+           <p class="badge rounded-pill text-center fs-4 pink mb-0"> {{numTotalSlotsActual(this.slots)}} </p>
+        </div>
+
+        <div class="chart-container">
+
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card shadow p-3">
         <h2 class="text-center">Number of dishes available</h2>
-        <p class="text-center fs-4 pink">{{numDihses}}</p>
+        <div class="mx-auto m-0 p-0">
+        <p class="badge rounded-pill text-center fs-4 pink mb-0">{{numDihses}}</p>
+        </div>
         <div class="chart-container">
 
         </div>
@@ -13,21 +27,15 @@
     <div class="col-md-4">
       <div class="card shadow p-3">
         <h2 class="text-center">Number of menus available</h2>
-        <p class="text-center fs-4 pink"> {{numMenus}}</p>
+        <div class="mx-auto m-0 p-0">
+        <p class="badge rounded-pill text-center fs-4 pink mb-0"> {{numMenus}}</p>
+        </div>
         <div class="chart-container">
 
         </div>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="card shadow p-3">
-        <h2 class="text-center">Number of registered users</h2>
-        <p class="text-center fs-4 pink"> {{numUsers}} </p>
-        <div class="chart-container">
 
-        </div>
-      </div>
-    </div>
   </div>
 
   <div class="card mt-5 shadow p-3">

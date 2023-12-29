@@ -4,7 +4,8 @@ import { SlotsDbService } from '../../../services/slots-db.service';
 import { Slot } from '../../../models/slots';
 import { MenusDbService } from '../../../services/menus-db.service';
 import { UserDbService } from '../../../services/user-db.service';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
+
 
 @Component({
   selector: 'app-bar-chart',
@@ -31,6 +32,7 @@ export class BarChartComponent {
   numDihses: number = 0;
   numMenus: number = 0;
 
+
   ngOnInit(): void {
 
     this.menusDbService.getMenus().subscribe({
@@ -54,6 +56,8 @@ export class BarChartComponent {
     });
 
     this.loadSlots();
+
+
 
     const data = {
       labels: this.timeArray,
@@ -107,5 +111,15 @@ export class BarChartComponent {
         });
       },
     });
+  }
+
+
+
+  numTotalSlotsActual(slots: Slot[]) {
+    let total = 0;
+    slots.forEach((slot: Slot) => {
+      total += slot.actual;
+    });
+    return total;
   }
 }

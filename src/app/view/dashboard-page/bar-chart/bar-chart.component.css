@@ -4,5 +4,14 @@
 }
 
 .pink{
-  color: rgba(245, 7, 233, 0.849)!important;
+  color:#FF4081!important;
+}
+.card{
+  background-color: #f0f0f0e7!important;
+  border-color: #495dcf7c;
+
+}
+.badge{
+  background-color: #495dcf28;
+
 }
