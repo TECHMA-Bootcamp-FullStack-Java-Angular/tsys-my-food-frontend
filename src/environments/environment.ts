@@ -1,4 +1,4 @@
 export const environment = {
-  apiUrl: 'myfood-api.up.railway.app',
+  apiUrl: 'https://tsys-my-food-api-production.up.railway.app/',
   production: false,
 };
