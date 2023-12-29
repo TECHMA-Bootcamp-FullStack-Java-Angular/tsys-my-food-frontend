@@ -1,6 +1,4 @@
 export const environment = {
-
-  //apiUrl: 'http://localhost:8181',
-  apiUrl: 'https://myfood.up.railway.app',
+  apiUrl: 'myfood-api.up.railway.app',
   production: true,
 };
