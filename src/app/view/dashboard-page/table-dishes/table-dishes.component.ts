@@ -11,7 +11,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { CommonModule } from '@angular/common';
 import { Subject } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { DishModalComponent } from './dish-modal/dish-modal.component'; 
+import { DishModalComponent } from './dish-modal/dish-modal.component';
 import Swal from 'sweetalert2';
 
 
@@ -26,7 +26,7 @@ import Swal from 'sweetalert2';
     MatMenuModule,
     MatTableModule,
     MatPaginatorModule],
-    templateUrl: './table-dishes.component.html',  
+    templateUrl: './table-dishes.component.html',
     styleUrl: './table-dishes.component.css'
 })
 export class TableDishesComponent implements OnInit {
@@ -52,7 +52,7 @@ export class TableDishesComponent implements OnInit {
   }
 
 
-  
+
   loadDishes(): void {
     const startIndex = this.currentPage - 1;
     const endIndex = this.selectedPageSize;
@@ -68,30 +68,33 @@ export class TableDishesComponent implements OnInit {
 
   deleteDish(dishId: number): void {
     Swal.fire({
-      title: 'Are you sure?',
-      text: 'You won\'t be able to revert this!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it',
-      cancelButtonText: 'Cancel'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.dishesService.deleteDish(dishId).subscribe(() => {
-          Swal.fire(
-            'Deleted!',
-            'The dish has been deleted.',
-            'success'
-          ).then(() => {
-            this.loadDishes();
-            this.totalPages = Math.ceil(this.totalEntities / this.selectedPageSize);
-          });
-        });
-      }
-    });
+      title: 'Option locked in for the demo version',
+    })
+    // Swal.fire({
+    //   title: 'Are you sure?',
+    //   text: 'You won\'t be able to revert this!',
+    //   icon: 'warning',
+    //   showCancelButton: true,
+    //   confirmButtonColor: '#3085d6',
+    //   cancelButtonColor: '#d33',
+    //   confirmButtonText: 'Yes, delete it',
+    //   cancelButtonText: 'Cancel'
+    // }).then((result) => {
+    //   if (result.isConfirmed) {
+    //     this.dishesService.deleteDish(dishId).subscribe(() => {
+    //       Swal.fire(
+    //         'Deleted!',
+    //         'The dish has been deleted.',
+    //         'success'
+    //       ).then(() => {
+    //         this.loadDishes();
+    //         this.totalPages = Math.ceil(this.totalEntities / this.selectedPageSize);
+    //       });
+    //     });
+    //   }
+    // });
   }
-  
+
 
   onChange(event: any): void {
     this.selectedPageSize = event.pageSize;
@@ -100,160 +103,173 @@ export class TableDishesComponent implements OnInit {
   }
 
   addDish() {
-    
+
     const dialogRef = this.dialog.open(DishModalComponent, {
-      width: '400px', 
+      width: '400px',
     })
     dialogRef.afterClosed().subscribe(() => {
-      
+
       this.loadDishes();
     });
   }
 
-  addDishes() {
-    const newDish: DishAdmin = { ...this.newDish };
-    newDish.name = prompt('Nombre del nuevo plato') || '';
-    newDish.description = prompt('Descripción del nuevo plato') || '';
-    newDish.image = prompt('URL de la imagen del nuevo plato') || '';
-    newDish.price = parseFloat(prompt('Precio del nuevo plato') || '0');
-    newDish.category = prompt('Nueva categoría, solo (appetizer, first, second, dessert)') || '';
-    newDish.visible= confirm('Visible?');
-    const attributesInput = prompt(
-      'Atributos del nuevo plato (opcional, separados por comas): celiac, nuts, vegan, vegetarian, lactose'
-    ) || '';
-    newDish.attributes = this.validateAttributes(attributesInput);
 
-    if (this.validateCategory(newDish)) {
-      console.log(newDish)
-      this.dishesService.addDish(newDish).subscribe(() => {
-        this.loadDishes();
-      });
-      this.resetNewDish();
-      alert('Plato añadido exitosamente.');
-    } else {
-      alert('Por favor, complete todos los campos correctamente antes de añadir el plato.');
-    }
+  addDishes() {
+    Swal.fire({
+      title: 'Option locked in for the demo version',
+    })
+    // const newDish: DishAdmin = { ...this.newDish };
+    // newDish.name = prompt('Nombre del nuevo plato') || '';
+    // newDish.description = prompt('Descripción del nuevo plato') || '';
+    // newDish.image = prompt('URL de la imagen del nuevo plato') || '';
+    // newDish.price = parseFloat(prompt('Precio del nuevo plato') || '0');
+    // newDish.category = prompt('Nueva categoría, solo (appetizer, first, second, dessert)') || '';
+    // newDish.visible= confirm('Visible?');
+    // const attributesInput = prompt(
+    //   'Atributos del nuevo plato (opcional, separados por comas): celiac, nuts, vegan, vegetarian, lactose'
+    // ) || '';
+    // newDish.attributes = this.validateAttributes(attributesInput);
+
+    // if (this.validateCategory(newDish)) {
+    //   console.log(newDish)
+    //   this.dishesService.addDish(newDish).subscribe(() => {
+    //     this.loadDishes();
+    //   });
+    //   this.resetNewDish();
+    //   alert('Plato añadido exitosamente.');
+    // } else {
+    //   alert('Por favor, complete todos los campos correctamente antes de añadir el plato.');
+    // }
   }
 
   editName(dish: DishAdmin): void {
     Swal.fire({
-      title: "Edit name",
-      input: "text",
-      inputValue: dish.name,
-      showCancelButton: true,
-      inputValidator: (value) => {
-        if (!value || value.trim() === '') {
-          return "You need to enter a valid name!";
-        } else {
-          return null;
-        }
-      },
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const newName = result.value.trim();
-        dish.name = newName;
-  
-        this.dishesService.updateDish(dish).subscribe(
-          () => {
-            this.loadDishes();
-  
-            Swal.fire({
-              position: 'center',
-              icon: 'success',
-              title: 'Your change has been saved',
-              showConfirmButton: false,
-              timer: 1000
-            });
-          }
-        );
-      } else {
-        console.log('Operation canceled by the user.');
-      }
-    });
+      title: 'Option locked in for the demo version',
+    })
+    // Swal.fire({
+    //   title: "Edit name",
+    //   input: "text",
+    //   inputValue: dish.name,
+    //   showCancelButton: true,
+    //   inputValidator: (value) => {
+    //     if (!value || value.trim() === '') {
+    //       return "You need to enter a valid name!";
+    //     } else {
+    //       return null;
+    //     }
+    //   },
+    // }).then((result) => {
+    //   if (result.isConfirmed) {
+    //     const newName = result.value.trim();
+    //     dish.name = newName;
+
+    //     this.dishesService.updateDish(dish).subscribe(
+    //       () => {
+    //         this.loadDishes();
+
+    //         Swal.fire({
+    //           position: 'center',
+    //           icon: 'success',
+    //           title: 'Your change has been saved',
+    //           showConfirmButton: false,
+    //           timer: 1000
+    //         });
+    //       }
+    //     );
+    //   } else {
+    //     console.log('Operation canceled by the user.');
+    //   }
+    // });
   }
 
   editDescription(dish: DishAdmin): void {
     Swal.fire({
-      title: "Edit description",
-      input: "text",
-      inputValue: dish.description,
-      showCancelButton: true,
-      inputValidator: (value) => {
-        if (!value || value.trim() === '') {
-          return "You need to enter a valid description!";
-        } else {
-          return null;
-        }
-      },
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const newDescription = result.value.trim();
-        dish.description = newDescription;
-  
-        this.dishesService.updateDish(dish).subscribe(() => {
-          this.loadDishes();
-  
-          Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Your change has been saved',
-            showConfirmButton: false,
-            timer: 1000
-          });
-        });
-      } else {
-        console.log('Operation canceled by the user.');
-      }
-    });
+      title: 'Option locked in for the demo version',
+    })
+    // Swal.fire({
+    //   title: "Edit description",
+    //   input: "text",
+    //   inputValue: dish.description,
+    //   showCancelButton: true,
+    //   inputValidator: (value) => {
+    //     if (!value || value.trim() === '') {
+    //       return "You need to enter a valid description!";
+    //     } else {
+    //       return null;
+    //     }
+    //   },
+    // }).then((result) => {
+    //   if (result.isConfirmed) {
+    //     const newDescription = result.value.trim();
+    //     dish.description = newDescription;
+
+    //     this.dishesService.updateDish(dish).subscribe(() => {
+    //       this.loadDishes();
+
+    //       Swal.fire({
+    //         position: 'center',
+    //         icon: 'success',
+    //         title: 'Your change has been saved',
+    //         showConfirmButton: false,
+    //         timer: 1000
+    //       });
+    //     });
+    //   } else {
+    //     console.log('Operation canceled by the user.');
+    //   }
+    // });
   }
 
   editImage(dish: DishAdmin): void {
     Swal.fire({
-      title: 'Edit Image',
-      text: 'Current Image:',
-      imageUrl: dish.image,
-      imageWidth: 400,
-      imageHeight: 200,
-      showCancelButton: true,
-      confirmButtonText: 'Update Image',
-      cancelButtonText: 'Cancel',
-      input: 'text',
-      inputValue: dish.image,
-      inputPlaceholder: 'Enter new image URL',
-      showLoaderOnConfirm: true,
-      preConfirm: (newImageUrl) => {
-        return new Promise<void>((resolve, reject) => {
-          if (newImageUrl && newImageUrl.trim() !== '') {
-            dish.image = newImageUrl.trim();
-            this.dishesService.updateDish(dish).subscribe(
-              () => {
-                resolve();
-              }
-            );
-          } else {
-            reject('Invalid image URL.');
-          }
-        });
-      }
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.loadDishes();
+      title: 'Option locked in for the demo version',
+    })
+    // Swal.fire({
+    //   title: 'Edit Image',
+    //   text: 'Current Image:',
+    //   imageUrl: dish.image,
+    //   imageWidth: 400,
+    //   imageHeight: 200,
+    //   showCancelButton: true,
+    //   confirmButtonText: 'Update Image',
+    //   cancelButtonText: 'Cancel',
+    //   input: 'text',
+    //   inputValue: dish.image,
+    //   inputPlaceholder: 'Enter new image URL',
+    //   showLoaderOnConfirm: true,
+    //   preConfirm: (newImageUrl) => {
+    //     return new Promise<void>((resolve, reject) => {
+    //       if (newImageUrl && newImageUrl.trim() !== '') {
+    //         dish.image = newImageUrl.trim();
+    //         this.dishesService.updateDish(dish).subscribe(
+    //           () => {
+    //             resolve();
+    //           }
+    //         );
+    //       } else {
+    //         reject('Invalid image URL.');
+    //       }
+    //     });
+    //   }
+    // }).then((result) => {
+    //   if (result.isConfirmed) {
+    //     this.loadDishes();
 
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Your change has been saved',
-          showConfirmButton: false,
-          timer: 1000
-        });
-      } else if (result.isDismissed && result.dismiss === Swal.DismissReason.cancel) {
-        console.log('Operation canceled by the user.');
-      }
-    }).catch((error) => {
-      Swal.fire('Error', error, 'error');
-    });
+    //     Swal.fire({
+    //       position: 'center',
+    //       icon: 'success',
+    //       title: 'Your change has been saved',
+    //       showConfirmButton: false,
+    //       timer: 1000
+    //     });
+    //   } else if (result.isDismissed && result.dismiss === Swal.DismissReason.cancel) {
+    //     console.log('Operation canceled by the user.');
+    //   }
+    // }).catch((error) => {
+    //   Swal.fire('Error', error, 'error');
+    // });
   }
-  
+
 
   editPrice(dish: DishAdmin): void {
     Swal.fire({
@@ -272,10 +288,10 @@ export class TableDishesComponent implements OnInit {
       if (result.isConfirmed) {
         const newPrice = parseFloat(result.value.trim());
         dish.price = newPrice;
-  
+
         this.dishesService.updateDish(dish).subscribe(() => {
           this.loadDishes();
-          
+
           Swal.fire({
             position: "center",
             icon: "success",
@@ -289,11 +305,11 @@ export class TableDishesComponent implements OnInit {
       }
     });
   }
-  
+
 
   editCategory(dish: DishAdmin): void {
     const allowedCategories = ['APPETIZER', 'FIRST', 'SECOND', 'DESSERT'];
-  
+
     Swal.fire({
       title: "Edit category",
       input: "select",
@@ -315,10 +331,10 @@ export class TableDishesComponent implements OnInit {
       if (result.isConfirmed) {
         const newCategory = result.value.toUpperCase();
         dish.category = newCategory;
-  
+
         this.dishesService.updateDish(dish).subscribe(() => {
           this.loadDishes();
-  
+
           Swal.fire({
             position: "center",
             icon: "success",
@@ -332,15 +348,15 @@ export class TableDishesComponent implements OnInit {
       }
     });
   }
-  
+
   toggleVisibility(dish: DishAdmin): void {
     this.dishesService.changeDishVisibility(dish.id).subscribe(
       () => {
         this.loadDishes();
-      } 
+      }
     )
   }
-  
+
 
   private validateAttributes(attributesInput: string): string[] {
     const allowedAttributes = ['celiac', 'nuts', 'vegan', 'vegetarian', 'lactose',''];
@@ -353,7 +369,7 @@ export class TableDishesComponent implements OnInit {
     const newCategory = prompt('Nueva categoría, solo (APPETIZER, FIRST, SECOND, DESSERT)', dish.category);
     return allowedCategories.includes(newCategory?.trim().toUpperCase() || '');
   }
-  
+
 
   private resetNewDish() {
     this.newDish = { id: 0, name: '', description: '', image: '', price: 0, category: '', attributes: [],visible: false };
@@ -375,7 +391,7 @@ export class TableDishesComponent implements OnInit {
 
   addAttribute(dishId: number): void {
     const allowedAttributes = ['CELIAC', 'NUTS', 'VEGAN', 'VEGETARIAN', 'LACTOSE'];
-  
+
     Swal.fire({
       title: 'Add Attribute',
       input: 'select',
@@ -397,12 +413,12 @@ export class TableDishesComponent implements OnInit {
       if (result.isConfirmed) {
         const newAttribute = result.value.toUpperCase();
         const idAt = this.checkAttribute(newAttribute);
-        
+
         if (idAt !== 0) {
           this.dishesService.addRelationAttribute(idAt, dishId).subscribe(
             () => {
               this.loadDishes();
-  
+
               Swal.fire({
                 position: 'center',
                 icon: 'success',
@@ -410,10 +426,10 @@ export class TableDishesComponent implements OnInit {
                 showConfirmButton: false,
                 timer: 1000
               });
-  
+
               this.totalPages = Math.ceil(this.totalEntities / this.selectedPageSize);
             }
-            
+
           );
         }
       } else {
@@ -453,7 +469,7 @@ export class TableDishesComponent implements OnInit {
       }
     });
   }
-  
+
   checkAttribute(attribute: string): number {
     switch (attribute) {
       case 'LACTOSE':
@@ -467,7 +483,7 @@ export class TableDishesComponent implements OnInit {
       case 'NUTS':
         return 5;
       default:
-        return 0; 
+        return 0;
     }
   }
   isEven(row: any): boolean {

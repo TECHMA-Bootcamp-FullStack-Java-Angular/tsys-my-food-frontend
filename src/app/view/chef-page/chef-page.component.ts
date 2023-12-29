@@ -43,7 +43,7 @@ export class ChefPageComponent implements OnInit{
       this.orders = content.sort((a: Order, b: Order) => {
         const timeA = a.slot?.time ? a.slot?.time.split(':').map(Number) : [0, 0];
         const timeB = b.slot?.time ? b.slot?.time.split(':').map(Number) : [0, 0];
-  
+
         if (timeA[0] !== timeB[0]) {
           return timeA[0] - timeB[0];
         } else {
@@ -65,16 +65,18 @@ export class ChefPageComponent implements OnInit{
       cancelButtonText: 'Cancel'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.ordersDbService.removeOrderChef(orderId).subscribe(() => {
+        // this.ordersDbService.removeOrderChef(orderId).subscribe(() => {
           Swal.fire(
             'Deleted!',
-            'The order with ID ' + orderId + ' has been deleted.',
+            'Option locked in for the demo version',
+            // 'The order with ID ' + orderId + ' has been deleted.',
             'success'
-          ).then(() => {
-            this.loadOrders();
-            this.totalPages = Math.ceil(this.totalEntities / this.selectedPageSize);
-          });
-        });
+          )
+        //     .then(() => {
+        //     this.loadOrders();
+        //     this.totalPages = Math.ceil(this.totalEntities / this.selectedPageSize);
+        //   });
+        // });
       }
     });
   }
@@ -146,5 +148,5 @@ export class ChefPageComponent implements OnInit{
           return true;
       }
     }
-    
+
 }

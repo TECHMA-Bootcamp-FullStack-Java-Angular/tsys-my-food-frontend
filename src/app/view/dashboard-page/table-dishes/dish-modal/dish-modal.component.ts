@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { DishAdmin } from '../../../../models/dish-admin';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -24,15 +25,18 @@ export class DishModalComponent {
 
   addDish() {
 
-    const newDish: DishAdmin =  { ...this.newDish };  
+    const newDish: DishAdmin =  { ...this.newDish };
     console.log(newDish);
 
-    this.dishesDbService.addDish(newDish).subscribe(
-      (result) => {
-        console.log('Dish added successfully:', result);
-        this.dialogRef.close();
-      }
-    );
+    // this.dishesDbService.addDish(newDish).subscribe(
+    //   (result) => {
+    //     console.log('Dish added successfully:', result);
+    //     this.dialogRef.close();
+    //   }
+    // );
+    Swal.fire({
+      title: 'Option locked in for the demo version',
+    })
   }
 
 }

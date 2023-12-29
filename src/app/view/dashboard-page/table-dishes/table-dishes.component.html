@@ -9,7 +9,7 @@
         aria-label="Select page"
         (page)="onChange($event)"
         ></mat-paginator>
-    
+
     <mat-table [dataSource]="dishes" class="mat-elevation-z8">
         <ng-container matColumnDef="id">
             <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
@@ -25,21 +25,21 @@
           </ng-container>
           <ng-container matColumnDef="image">
             <mat-header-cell *matHeaderCellDef>Image</mat-header-cell>
-            <mat-cell *matCellDef="let dish" 
-                    (mouseenter)="enlargeImage(dish)" 
-                    (mouseleave)="resetImageSize()" 
+            <mat-cell *matCellDef="let dish"
+                    (mouseenter)="enlargeImage(dish)"
+                    (mouseleave)="resetImageSize()"
                     (click)="editImage(dish)">
               <div [ngStyle]="{ 'cursor': 'pointer' }">
-                <img class="dish-image" [src]="dish.image" alt="{{ dish.name }}" id="dish-image-{{ dish.id }}">
+                <img class="dish-image card" [src]="dish.image" alt="{{ dish.name }}" id="dish-image-{{ dish.id }}">
               </div>
             </mat-cell>
           </ng-container>
-          
+
         <ng-container matColumnDef="price">
             <mat-header-cell *matHeaderCellDef>Price</mat-header-cell>
             <mat-cell *matCellDef="let dish" (click)="editPrice(dish)">{{ dish.price | currency:'EUR' }}</mat-cell>
           </ng-container>
-          
+
           <ng-container matColumnDef="category">
             <mat-header-cell *matHeaderCellDef>Category</mat-header-cell>
             <mat-cell *matCellDef="let dish" (click)="editCategory(dish)">{{ dish.category }}</mat-cell>
@@ -61,7 +61,7 @@
                 <button mat-icon-button color="primary"(click)="addAttribute(dish.id)">+</button>
                 </div>
             </mat-cell>
-        </ng-container>        
+        </ng-container>
         <ng-container matColumnDef="visible">
             <mat-header-cell *matHeaderCellDef>Visible</mat-header-cell>
             <mat-cell *matCellDef="let dish">

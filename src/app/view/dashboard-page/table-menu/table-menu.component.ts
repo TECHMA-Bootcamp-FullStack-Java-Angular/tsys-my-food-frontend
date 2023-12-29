@@ -145,28 +145,31 @@ export class TableMenuComponent {
 
   deleteMenu(menuId: number): void {
     Swal.fire({
-      title: 'Are you sure?',
-      text: 'You won\'t be able to revert this!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it',
-      cancelButtonText: 'Cancel'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.menusService.deleteMenu(menuId).subscribe(() => {
-          Swal.fire(
-            'Deleted!',
-            'The menu with ID ' + menuId + ' has been deleted.',
-            'success'
-          ).then(() => {
-            this.loadMenusApi();
-            this.totalPages = Math.ceil(this.totalEntities / this.selectedPageSize);
-          });
-        });
-      }
-    });
+      title: 'Option locked in for the demo version',
+    })
+    // Swal.fire({
+    //   title: 'Are you sure?',
+    //   text: 'You won\'t be able to revert this!',
+    //   icon: 'warning',
+    //   showCancelButton: true,
+    //   confirmButtonColor: '#3085d6',
+    //   cancelButtonColor: '#d33',
+    //   confirmButtonText: 'Yes, delete it',
+    //   cancelButtonText: 'Cancel'
+    // }).then((result) => {
+    //   if (result.isConfirmed) {
+    //     this.menusService.deleteMenu(menuId).subscribe(() => {
+    //       Swal.fire(
+    //         'Deleted!',
+    //         'The menu with ID ' + menuId + ' has been deleted.',
+    //         'success'
+    //       ).then(() => {
+    //         this.loadMenusApi();
+    //         this.totalPages = Math.ceil(this.totalEntities / this.selectedPageSize);
+    //       });
+    //     });
+    //   }
+    // });
   }
 
   addMenu() {

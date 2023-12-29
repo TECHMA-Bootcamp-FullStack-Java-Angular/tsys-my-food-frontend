@@ -68,7 +68,7 @@ export class TableOrdersComponent implements OnInit {
       this.ordersDate=[];
     });
   }
-    
+
   onChange(event: any): void {
     this.selectedPageSize = event.pageSize;
     this.currentPage = event.pageIndex + 1;
@@ -77,28 +77,31 @@ export class TableOrdersComponent implements OnInit {
 
   removeOrder(orderId: number): void {
     Swal.fire({
-      title: 'Are you sure?',
-      text: 'You won\'t be able to revert this!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it',
-      cancelButtonText: 'Cancel'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.ordersDbService.removeOrder(orderId).subscribe(() => {
-          Swal.fire(
-            'Deleted!',
-            'The order with ID ' + orderId + ' has been deleted.',
-            'success'
-          ).then(() => {
-            this.loadOrders();
-            this.totalPages = Math.ceil(this.totalEntities / this.selectedPageSize);
-          });
-        });
-      }
-    });
+      title: 'Option locked in for the demo version',
+    })
+    // Swal.fire({
+    //   title: 'Are you sure?',
+    //   text: 'You won\'t be able to revert this!',
+    //   icon: 'warning',
+    //   showCancelButton: true,
+    //   confirmButtonColor: '#3085d6',
+    //   cancelButtonColor: '#d33',
+    //   confirmButtonText: 'Yes, delete it',
+    //   cancelButtonText: 'Cancel'
+    // }).then((result) => {
+    //   if (result.isConfirmed) {
+    //     this.ordersDbService.removeOrder(orderId).subscribe(() => {
+    //       Swal.fire(
+    //         'Deleted!',
+    //         'The order with ID ' + orderId + ' has been deleted.',
+    //         'success'
+    //       ).then(() => {
+    //         this.loadOrders();
+    //         this.totalPages = Math.ceil(this.totalEntities / this.selectedPageSize);
+    //       });
+    //     });
+    //   }
+    // });
   }
 
   returnToPreviousView() {
@@ -115,12 +118,12 @@ export class TableOrdersComponent implements OnInit {
 
   openDatePicker(): void {
     const today = new Date().toISOString().split('T')[0];
-  
+
     Swal.fire({
       title: 'Select date',
       input: 'date',
       inputAttributes: {
-        min: '1900-01-01', 
+        min: '1900-01-01',
       },
       didOpen: () => {
         const input = Swal.getInput();

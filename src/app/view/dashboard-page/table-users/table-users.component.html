@@ -15,7 +15,7 @@
         <mat-header-cell *matHeaderCellDef class="mat-column-id">ID</mat-header-cell>
         <mat-cell *matCellDef="let user">{{ user.id }}</mat-cell>
       </ng-container>
-  
+
       <ng-container matColumnDef="username">
         <mat-header-cell *matHeaderCellDef class="mat-column-username">Username</mat-header-cell>
         <mat-cell *matCellDef="let user" (click)="copyToClipboard(user.username)">
@@ -23,7 +23,7 @@
             {{ user.username }}
           </div></mat-cell>
       </ng-container>
-  
+
       <ng-container matColumnDef="email">
         <mat-header-cell *matHeaderCellDef class="mat-column-email">Email</mat-header-cell>
         <mat-cell *matCellDef="let user" (click)="copyToClipboard(user.email)">
@@ -32,26 +32,25 @@
           </div>
         </mat-cell>
       </ng-container>
-      
-  
+
+
       <ng-container matColumnDef="role">
         <mat-header-cell *matHeaderCellDef class="mat-column-role">Role</mat-header-cell>
         <mat-cell *matCellDef="let user">
           {{ user.role.name }}
         </mat-cell>
       </ng-container>
-  
+
       <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef class="mat-column-actions">Actions</mat-header-cell>
         <mat-cell *matCellDef="let user">
           <button class="button" mat-icon-button color="primary" (click)="updateRole(user.id,user)"><mat-icon aria-hidden="false"  fontIcon="manage_accounts"></mat-icon></button>
-          <button mat-icon-button color="warn" (click)="deleteUser(user.id)"><mat-icon aria-hidden="false"  fontIcon="person_remove"></mat-icon></button>
+          <button mat-icon-button color="warn" (click)="deleteUser(user.id)"><mat-icon aria-hidden="false"  fontIcon="person_remove" ></mat-icon></button>
         </mat-cell>
       </ng-container>
-  
+
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns" [ngClass]="{'even-row': isEven(row), 'odd-row': !isEven(row)}"></mat-row>
     </mat-table>
-  
+
   </div>
-  

@@ -61,35 +61,38 @@ export class TableUsersComponent {
       this.users = content;
     });
   }
-  
+
   deleteUser(userId: number): void {
     Swal.fire({
-      title: 'Are you sure?',
-      text: 'You won\'t be able to revert this!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it',
-      cancelButtonText: 'Cancel'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.userDbService.deleteUser(userId).subscribe(() => {
-          Swal.fire(
-            'Deleted!',
-            'The user' + userId + ' has been deleted.',
-            'success'
-          ).then(() => {
-            this.loadUsers();
-            this.totalPages = Math.ceil(this.totalEntities / this.selectedPageSize);
-          });
-        }, (error) => {
-          Swal.fire('Error', 'An error occurred while deleting the user.', 'error');
-        });
-      }
-    });
+      title: 'Option locked in for the demo version',
+    })
+    // Swal.fire({
+    //   title: 'Are you sure?',
+    //   text: 'You won\'t be able to revert this!',
+    //   icon: 'warning',
+    //   showCancelButton: true,
+    //   confirmButtonColor: '#3085d6',
+    //   cancelButtonColor: '#d33',
+    //   confirmButtonText: 'Yes, delete it',
+    //   cancelButtonText: 'Cancel'
+    // }).then((result) => {
+    //   if (result.isConfirmed) {
+    //     this.userDbService.deleteUser(userId).subscribe(() => {
+    //       Swal.fire(
+    //         'Deleted!',
+    //         'The user' + userId + ' has been deleted.',
+    //         'success'
+    //       ).then(() => {
+    //         this.loadUsers();
+    //         this.totalPages = Math.ceil(this.totalEntities / this.selectedPageSize);
+    //       });
+    //     }, (error) => {
+    //       Swal.fire('Error', 'An error occurred while deleting the user.', 'error');
+    //     });
+    //   }
+    // });
   }
-  
+
   closeRoleModal(): void {
     this.showRoleModal = false;
     this.selectedUser = undefined;
@@ -110,7 +113,7 @@ export class TableUsersComponent {
       });
     });
   }
-  
+
   onChange(event: any): void {
     this.selectedPageSize = event.pageSize;
     this.currentPage = event.pageIndex + 1;
@@ -137,7 +140,7 @@ export class TableUsersComponent {
       panelClass: ['copied-snackbar'],
     });
   }
-  
+
   isEven(row: any): boolean {
     return this.users.indexOf(row) % 2 === 0;
   }
