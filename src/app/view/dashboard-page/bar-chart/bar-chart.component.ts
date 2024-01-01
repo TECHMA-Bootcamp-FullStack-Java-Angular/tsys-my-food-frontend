@@ -15,6 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './bar-chart.component.css',
 })
 export class BarChartComponent {
+  
   @ViewChild('slotChart') Chart: ElementRef | undefined;
 
   slotsDbService = inject(SlotsDbService);
