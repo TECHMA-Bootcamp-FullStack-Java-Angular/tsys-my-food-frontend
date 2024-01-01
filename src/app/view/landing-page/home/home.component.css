@@ -16,12 +16,35 @@
   z-index: -1;
 }
 
-.rotated-div {
-  transform: rotate(-15deg);
-  -webkit-transform: rotate(-15deg);
-  -moz-transform: rotate(-15deg);
-  -ms-transform: rotate(-15deg);
-  -o-transform: rotate(-15deg);
+img{
+  margin-top: 2rem;
+  width: 15%;
 }
 
 
+@media only screen and (max-width: 767px) {
+
+  botton{
+    margin-bottom: 5rem !important;
+  }
+
+  .text-rotate{
+    margin-top: 10%;
+    margin-bottom: 10%;
+  }
+
+  .rotated-div {
+
+    font-weight: 600;
+    color: rgb(22, 109, 4);
+    transform: rotate(-15deg);
+    -webkit-transform: rotate(-15deg);
+    -moz-transform: rotate(-15deg);
+    -ms-transform: rotate(-15deg);
+    -o-transform: rotate(-15deg);
+  }
+
+  img{
+    width: 40%;}
+
+}

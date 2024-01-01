@@ -101,17 +101,20 @@ export class TableUsersComponent {
 
   updateRole(userId: number, user: UserDTO): void {
     this.selectedUserId = userId;
-    this.userDbService.updateUser(userId, user).subscribe(() => {
-      this.loadUsers();
+    Swal.fire({
+      title: 'Option locked in for the demo version',
+    })
+    // this.userDbService.updateUser(userId, user).subscribe(() => {
+    //   this.loadUsers();
 
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Your change has been saved',
-        showConfirmButton: false,
-        timer: 1000
-      });
-    });
+    //   Swal.fire({
+    //     position: 'center',
+    //     icon: 'success',
+    //     title: 'Your change has been saved',
+    //     showConfirmButton: false,
+    //     timer: 1000
+    //   });
+    // });
   }
 
   onChange(event: any): void {

@@ -2,6 +2,7 @@
     <div class="sidebar">
         <app-logo> </app-logo>
         <ul class="nav flex-column">
+          <button class="items bg-secondary text-light" routerLink="/admin/chart" mat-raised-button ><mat-icon aria-hidden="false" fontIcon="  bar_chart"></mat-icon>PANEL</button>
             <button class="items" routerLink="/admin/users" mat-raised-button color="accent mx-1"><mat-icon aria-hidden="false" fontIcon="group"></mat-icon> USERS</button>
             <button class="items" routerLink="/admin/slots" mat-raised-button color="accent mx-1"><mat-icon aria-hidden="false" fontIcon="schedule"></mat-icon>SLOTS</button>
             <button class="items" routerLink="/admin/orders" mat-raised-button color="accent mx-1"><mat-icon aria-hidden="false" fontIcon="shopping_bag"></mat-icon>ORDERS</button>
@@ -12,7 +13,7 @@
             <button class="items" routerLink="/user/initial" mat-raised-button color="primary mx-1"><mat-icon aria-hidden="false" fontIcon="person"></mat-icon>USER</button>
 
         </ul>
-        <div class="logout">
+        <div class="logout mx-auto mb-2">
             <button (click)="logOut()" mat-raised-button color="warn mx-1"><mat-icon class="mx-2" aria-hidden="false"  fontIcon="logout"></mat-icon> <b>LOGOUT</b></button>
         </div>
     </div>
@@ -20,3 +21,4 @@
         <router-outlet></router-outlet>
     </div>
 </div>
+

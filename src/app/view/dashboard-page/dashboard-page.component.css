@@ -32,3 +32,17 @@
   margin-top: auto;
   font-weight: bold;
 }
+
+.mensaje-movil {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #dd1414ea;
+  color: #ecdede;
+  font-weight: 700;
+  padding: 10px;
+  text-align: center;
+
+}
+

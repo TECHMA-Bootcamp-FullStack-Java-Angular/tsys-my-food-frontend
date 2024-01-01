@@ -15,3 +15,14 @@
   background-color: #495dcf28;
 
 }
+
+@media only screen and (max-width: 767px) {
+  .card-chart {
+    display: none;
+  }
+  .card{
+    margin-top: 20px;
+    height: 28vh;
+  }
+}
+
