@@ -48,11 +48,6 @@ export class BarChartComponent {
       },
     });
 
-    this.userDbService.getUsersAll().subscribe({
-      next: (ApiResponse) => {
-        this.numUsers = ApiResponse.totalElements;
-      },
-    });
 
     this.loadSlots();
 
