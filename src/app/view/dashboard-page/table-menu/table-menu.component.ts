@@ -122,7 +122,7 @@ export class TableMenuComponent {
       this.selectedPageSize=size
       this.menusApi = content;
       this.dataSource.data = this.menusApi;
-      console.log(this.dataSource.data);
+
     });
   }
 

@@ -15,7 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './bar-chart.component.css',
 })
 export class BarChartComponent {
-  
+
   @ViewChild('slotChart') Chart: ElementRef | undefined;
 
   slotsDbService = inject(SlotsDbService);
@@ -37,8 +37,8 @@ export class BarChartComponent {
   ngOnInit(): void {
 
     this.menusDbService.getMenus().subscribe({
-      next: (data) => {
-        this.numMenus = data.length;
+      next: (data: any) => {
+        this.numMenus = data.totalElements;
       },
     });
 
@@ -50,8 +50,6 @@ export class BarChartComponent {
 
     this.userDbService.getUsersAll().subscribe({
       next: (ApiResponse) => {
-
-        console.log(ApiResponse);
         this.numUsers = ApiResponse.totalElements;
       },
     });

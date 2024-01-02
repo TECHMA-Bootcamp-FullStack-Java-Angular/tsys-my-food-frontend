@@ -60,12 +60,6 @@ export class ChefPageComponent implements OnInit{
 
         }
 
-        this.servOrder.getHistorialByUserId().subscribe({
-
-        })
-
-
-
       });
       this.dataSource = new MatTableDataSource<Order>(this.orders);
       console.log(this.dataSource.data);

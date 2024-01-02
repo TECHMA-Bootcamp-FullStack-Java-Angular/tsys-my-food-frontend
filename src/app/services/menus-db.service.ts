@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, EMPTY, Observable, Subject, tap } from 'rxjs';
 import { Menu, MenuUserNew } from '../models/menu-admin';
 import { HttpClient } from '@angular/common/http';
@@ -13,22 +13,21 @@ export class MenusDbService {
 
   private url = environment.apiUrl + '/api/v1/menus';
   private url2 = environment.apiUrl + '/api/v1/menu';
+
   private menuVisibilityChanged = new Subject<number>();
 
   private menusSubject = new BehaviorSubject<Menu[]>(this.menus);
-  private lastId = this.menus.length > 0 ? Math.max(...this.menus.map((menu) => menu.id)) : 0;
+
 
   constructor(private http: HttpClient) {}
 
   getMenus() {
-    return this.menusSubject.asObservable();
+    return this.http.get<any[]>(this.url);
   }
 
   getMenusFromApi(startIndex: number, endIndex: number) {
     return this.http.get<any[]>(this.url+"?page="+startIndex+"&size="+endIndex);
   }
-
-
 
   getTotalMenus(): number {
     return this.menus.length;
