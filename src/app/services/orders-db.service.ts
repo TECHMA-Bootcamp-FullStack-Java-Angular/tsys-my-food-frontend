@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import {  Observable } from 'rxjs';
 import { Order } from '../models/orders-admin';
 import { inject } from '@angular/core';
 import { environment } from '../../environments/environment';
@@ -11,15 +11,15 @@ import { HttpClient } from '@angular/common/http';
 })
 export class OrdersDbService {
 
-  private ordersSubject: BehaviorSubject<Order[]> = new BehaviorSubject<Order[]>([]);
-  
   private url = environment.apiUrl + '/api/v1/orders';
   private url2 = environment.apiUrl + '/api/v1/order';
   private http = inject(HttpClient)
 
-  getOrdersApi(num1:number,num2:number): Observable<Order[]> {
+  getOrdersApi(num1: number, num2: number): Observable<Order[]> {
     return this.http.get<any[]>(this.url+"?page="+num1+"&size="+num2);
   }
+
+
   getOrdersDateApi(page:number,size:number,year:number,month:number,day:number): Observable<Order[]> {
     if(day == 0){
       if(month == 0){
@@ -29,7 +29,7 @@ export class OrdersDbService {
         else{
           return this.http.get<any[]>(this.url+"/date?year="+year+"&size=100");
         }
-        
+
       }
       else{
         return this.http.get<any[]>(this.url+"/date?year="+year+"&month="+month+"&size=100");

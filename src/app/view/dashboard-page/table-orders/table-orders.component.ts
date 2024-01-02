@@ -53,13 +53,16 @@ export class TableOrdersComponent implements OnInit {
   constructor(public ordersDbService: OrdersDbService,private dishesDbService: DishesDbService,private router: Router) { }
 
   ngOnInit(): void {
-    this.loadOrders();
+    // this.loadOrders();
+    this.loadOrdersDate(2024,0,0);
+
+
   }
 
   loadOrders(): void {
     const startIndex = this.currentPage - 1;
     const endIndex = this.selectedPageSize;
-    this.ordersDbService.getOrdersApi(startIndex,endIndex).subscribe((orders:any) => {
+    this.ordersDbService.getOrdersApi(startIndex, endIndex).subscribe((orders: any) => {
       const {totalElements,totalPages,content,size}=orders;
       this.totalPages = totalPages;
       this.totalEntities=totalElements;

@@ -5,6 +5,7 @@ export interface Menu {
     categorySecond: number;
     categoryDessert: number;
     visible: boolean;
+    price: number;
 }
 
 
@@ -47,6 +48,7 @@ export interface MenuUser {
     visible: true
   },
   visible: boolean
+  price : number;
 }
   export interface MenuUserNew {
     appetizer: {
@@ -86,5 +88,6 @@ export interface MenuUser {
       visible: true
     },
     visible: boolean
+    price : number;
   }
 

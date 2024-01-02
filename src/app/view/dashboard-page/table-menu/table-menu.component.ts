@@ -42,13 +42,14 @@ export class TableMenuComponent {
   dishesSecond: DishAdmin[] = [];
   dishesDessert: DishAdmin[] = [];
   newMenuApi:MenuUserNew={
-    appetizer:{ id:0, name:'', description:'', image:'', price: 0, category:'', visible: true},
+    appetizer:{ id:0, name:'', description:'', image:'', price: 0, category:'', visible: true },
     first:{ id:0, name:'', description:'', image:'', price: 0, category:'', visible: true},
     second:{ id:0, name:'', description:'', image:'', price: 0, category:'', visible: true},
     dessert:{ id:0, name:'', description:'', image:'', price: 0, category:'', visible: true},
-    visible:true
+    visible: true,
+    price: 0
   }
-  newMenu: Menu = { id: 0, categoryAppetizer: 0, categoryFirst: 0, categorySecond: 0, categoryDessert: 0, visible: true };
+  newMenu: Menu = { id: 0, categoryAppetizer: 0, categoryFirst: 0, categorySecond: 0, categoryDessert: 0, visible: true ,price:0 };
   dishes: DishAdmin[] = [];
   dishNames: { [key: number]: string } = {};
   dishCategories: string[] = [];
@@ -56,7 +57,7 @@ export class TableMenuComponent {
   editingMenuId: number | null = null;
   editingMenu: Menu | null = null;
 
-  displayedColumns: string[] = ['id','appetizer','first','second','dessert','visible', 'actions'];
+  displayedColumns: string[] = ['id','appetizer','first','second','dessert','price', 'visible', 'actions'];
   currentPage: number = 1;
   itemsPerPage: number = 2;
   totalPages: number = 0;
@@ -72,6 +73,8 @@ export class TableMenuComponent {
     this.loadMenusApi();
     this.loadDishesCategoryApi();
   }
+
+
 
   loadMenus(): void {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
@@ -111,13 +114,15 @@ export class TableMenuComponent {
   loadMenusApi(): void {
     const startIndex = this.currentPage - 1;
     const endIndex = this.selectedPageSize;
-    this.menusService.getMenusFromApi(startIndex,endIndex).subscribe((menus:any) => {
+    this.menusService.getMenusFromApi(startIndex, endIndex).subscribe((menus: any) => {
+
       const {totalElements,totalPages,content,size}=menus;
       this.totalPages = totalPages;
       this.totalEntities=totalElements;
       this.selectedPageSize=size
       this.menusApi = content;
       this.dataSource.data = this.menusApi;
+      console.log(this.dataSource.data);
     });
   }
 
@@ -197,6 +202,7 @@ export class TableMenuComponent {
           categorySecond: this.newMenu.categorySecond,
           categoryDessert: this.newMenu.categoryDessert,
           visible: true,
+          price:0
         };
 
       }
@@ -220,7 +226,7 @@ export class TableMenuComponent {
   }
 
   resetNewMenu() {
-    this.newMenu = { id: 0, categoryAppetizer: 0, categoryFirst: 0, categorySecond: 0, categoryDessert: 0, visible: true };
+    this.newMenu = { id: 0, categoryAppetizer: 0, categoryFirst: 0, categorySecond: 0, categoryDessert: 0, visible: true ,price:0 };
   }
 
   toggleVisibility(menu: MenuUser): void {

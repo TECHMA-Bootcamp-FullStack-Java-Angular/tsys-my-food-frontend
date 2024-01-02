@@ -33,6 +33,7 @@ mat-paginator{
     margin-right: 10px;
 }
 
+
 .order-dasboard {
     display: flex;
     flex-direction: column;
@@ -59,13 +60,15 @@ mat-header-cell{
 .mat-column-actions,
 .mat-column-maked,
 .mat-column-slot,
-.mat-column-price {
+.mat-column-price
+{
     width: 80px;
     max-width: 80px;
     min-width: 80px;
     justify-content: center;
 }
-.mat-column-datetime{
+
+.mat-column-date{
     justify-content: center;
 }
 

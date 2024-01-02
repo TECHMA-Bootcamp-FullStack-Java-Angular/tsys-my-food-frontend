@@ -37,9 +37,9 @@
       <button class="buttonnav" mat-raised-button color="primary">Add</button>
     </div>
   </form>
-  
-  
-  
+
+
+
   <mat-paginator
   [pageSize]="selectedPageSize"
   [pageIndex]="currentPage - 1"
@@ -49,6 +49,7 @@
   (page)="onChange($event)">
 </mat-paginator>
   <mat-table [dataSource]="menusApi" class="mat-elevation-z8">
+
     <ng-container matColumnDef="id">
       <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
       <mat-cell *matCellDef="let menu">{{ menu.id }}</mat-cell>
@@ -58,7 +59,7 @@
       <mat-header-cell *matHeaderCellDef>Appetizer</mat-header-cell>
       <mat-cell *matCellDef="let menu">{{ menu.appetizer.name }}</mat-cell>
     </ng-container>
-    
+
     <ng-container matColumnDef="first">
       <mat-header-cell *matHeaderCellDef>First</mat-header-cell>
       <mat-cell *matCellDef="let menu">{{ menu.first.name }}</mat-cell>
@@ -72,7 +73,11 @@
       <mat-cell *matCellDef="let menu">{{ menu.dessert.name }}</mat-cell>
     </ng-container>
 
-    
+    <ng-container matColumnDef="price">
+      <mat-header-cell *matHeaderCellDef>Price</mat-header-cell>
+      <mat-cell *matCellDef="let menu">{{ menu.price }}</mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="visible">
       <mat-header-cell *matHeaderCellDef>Visible</mat-header-cell>
       <mat-cell *matCellDef="let menu">
@@ -92,5 +97,5 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns" [ngClass]="{'even-row': isEven(row), 'odd-row': !isEven(row)}"></mat-row>
   </mat-table>
-  
+
 

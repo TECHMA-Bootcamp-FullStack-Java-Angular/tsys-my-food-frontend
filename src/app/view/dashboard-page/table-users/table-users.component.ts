@@ -13,6 +13,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import Swal from 'sweetalert2';
 import { NgClass } from '@angular/common';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-table-users',
@@ -26,6 +27,8 @@ import { NgClass } from '@angular/common';
     MatPaginatorModule,NgClass,
     JsonPipe,
     MatTooltipModule,
+    DatePipe
+
   ],
   templateUrl: './table-users.component.html',
   styleUrl: './table-users.component.css'
@@ -33,7 +36,7 @@ import { NgClass } from '@angular/common';
 export class TableUsersComponent {
 
   users: UserforAdmin[] = [];
-  displayedColumns: string[] = ['id', 'username', 'email', 'role', 'actions'];
+  displayedColumns: string[] = ['id', 'username', 'email', 'create', 'update', 'role', 'actions'];
 
   showRoleModal = false;
   selectedUser: UserforAdmin | undefined;
@@ -48,6 +51,7 @@ export class TableUsersComponent {
 
   ngOnInit(): void {
     this.loadUsers();
+
   }
 
   loadUsers(): void {
@@ -59,6 +63,7 @@ export class TableUsersComponent {
       this.totalEntities=totalElements;
       this.selectedPageSize=size
       this.users = content;
+      console.log(this.users);
     });
   }
 

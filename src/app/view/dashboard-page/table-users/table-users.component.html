@@ -33,6 +33,30 @@
         </mat-cell>
       </ng-container>
 
+      <ng-container matColumnDef="create">
+        <mat-header-cell *matHeaderCellDef class="mat-column-email">CreateAt</mat-header-cell>
+        <mat-cell *matCellDef="let user" >
+          <div matTooltip="{{ user.createdAt}}">
+            {{ user.createdAt
+              | date:'dd/MM/yyyy' }}
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="update">
+        <mat-header-cell *matHeaderCellDef class="mat-column-email">UpdateAt</mat-header-cell>
+        <mat-cell *matCellDef="let user" >
+          <div matTooltip="{{ user.updatedAt}}">
+            @if(user.updatedAt === null){
+              {{ "-- /-- / --" }}
+            } @else {
+              {{ user.updatedAt
+              | date:'dd/MM/yyyy' }}
+            }
+          </div>
+        </mat-cell>
+      </ng-container>
+
 
       <ng-container matColumnDef="role">
         <mat-header-cell *matHeaderCellDef class="mat-column-role">Role</mat-header-cell>

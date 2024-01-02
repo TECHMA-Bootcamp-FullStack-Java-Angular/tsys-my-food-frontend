@@ -101,16 +101,22 @@ export class InitialComponent implements OnDestroy {
 
   addMenu(menus: Menu) {
     if (menus) {
-      this.listDishesShow.push(menus.appetizer);
+      menus.appetizer.price = 0;
+      menus.first.price = 0;
+      menus.second.price = 0;
+      menus.dessert.price = 0;
+      this.listDishesShow.push(menus.appetizer)
+
       this.listDishesShow.push(menus.first);
       this.listDishesShow.push(menus.second);
       this.listDishesShow.push(menus.dessert);
-      const totalPriceMenu = menus.appetizer.price + menus.first.price + menus.second.price + menus.dessert.price;
-      const totalPriceWithDiscount = totalPriceMenu * 0.9;
-      this.addTotlaPrice(totalPriceWithDiscount);
+      
+      this.addTotlaPrice(9.95)
       this.servOrder.listMenusOrders.push(menus);
     }
+
   }
+
 
   addCard(dihs: Dish) {
     this.addTotlaPrice(dihs.price);

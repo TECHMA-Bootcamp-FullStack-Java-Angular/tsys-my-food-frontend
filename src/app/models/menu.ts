@@ -7,4 +7,5 @@ export interface Menu {
   second: Dish,
   dessert: Dish,
   visible: boolean
+  price: number
 }

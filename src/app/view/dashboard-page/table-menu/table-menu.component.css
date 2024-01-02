@@ -16,13 +16,13 @@ mat-header-row{
 }
 
 .mdc-data-table__table{
-    min-width: 70%;
-    width: 80px;
+    min-width: 80%;
+    width: 90px;
     max-width: 80px;
 }
 mat-paginator{
-    min-width: 70%;
-    width: 80px;
+    min-width: 80%;
+    width: 90px;
     max-width: 80px;
 }
 .dish-dasboard {
@@ -47,7 +47,8 @@ mat-header-cell{
 
 .mat-column-id,
 .mat-column-actions,
-.mat-column-visible
+.mat-column-visible,
+.mat-column-price
 {
     width: 80px;
     max-width: 80px;
@@ -58,7 +59,8 @@ mat-header-cell{
 .mat-column-appetizer,
 .mat-column-first,
 .mat-column-second,
-.mat-column-dessert{
+.mat-column-dessert
+{
     justify-content: center;
 
 }
@@ -82,8 +84,8 @@ mat-header-cell{
     margin-top: 25px;
     display: flex;
     flex-direction: column;
-    align-items: flex-end; 
-    
+    align-items: flex-end;
+
 }
 
 .customm-col button {

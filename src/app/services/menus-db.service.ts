@@ -8,15 +8,8 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class MenusDbService {
-  
-  
-  private menus: Menu[] = [
-    { id: 1, categoryAppetizer: 1, categoryFirst: 2, categorySecond: 4, categoryDessert: 5, visible: true },
-    { id: 2, categoryAppetizer: 9, categoryFirst: 3, categorySecond: 6, categoryDessert: 8, visible: true },
-    { id: 3, categoryAppetizer: 9, categoryFirst: 2, categorySecond: 6, categoryDessert: 8, visible: false },
-    { id: 4, categoryAppetizer: 9, categoryFirst: 3, categorySecond: 4, categoryDessert: 8, visible: false }
 
-  ];
+  private menus: Menu[] = [];
 
   private url = environment.apiUrl + '/api/v1/menus';
   private url2 = environment.apiUrl + '/api/v1/menu';
@@ -24,7 +17,7 @@ export class MenusDbService {
 
   private menusSubject = new BehaviorSubject<Menu[]>(this.menus);
   private lastId = this.menus.length > 0 ? Math.max(...this.menus.map((menu) => menu.id)) : 0;
-  
+
   constructor(private http: HttpClient) {}
 
   getMenus() {
@@ -34,6 +27,8 @@ export class MenusDbService {
   getMenusFromApi(startIndex: number, endIndex: number) {
     return this.http.get<any[]>(this.url+"?page="+startIndex+"&size="+endIndex);
   }
+
+
 
   getTotalMenus(): number {
     return this.menus.length;
@@ -72,17 +67,17 @@ export class MenusDbService {
   updateAppetizer(updatedAppetizer: MenuUserNew): Observable<any> {
     const appetizerId = updatedAppetizer.appetizer.id;
     const updatedName = prompt('Editar nombre', updatedAppetizer.appetizer.name);
-  
+
     if (updatedName !== null && updatedName.trim() !== '') {
       const updatedAppetizerData = { name: updatedName.trim() };
-      
+
       const url = `${this.url2}/${appetizerId}`;
-      
+
       return this.http.put(url, updatedAppetizerData, { headers: { 'Content-Type': 'application/json' } });
     } else {
       return EMPTY;
     }
   }
-  
-  
+
+
 }
