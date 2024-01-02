@@ -10,6 +10,7 @@ import { NgClass } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
 import Swal from 'sweetalert2';
+import { HistorialUserService } from '../../services/historial-user.service';
 @Component({
   selector: 'app-chef-page',
   standalone: true,
@@ -30,16 +31,24 @@ export class ChefPageComponent implements OnInit{
   currentPage: number = 1;
   totalPages: number = 1;
 
+  OdersById: Order[] = [];
+
+  servOrder = inject(HistorialUserService)
+
   constructor(private router: Router,public ordersDbService: OrdersDbService,private snackBar: MatSnackBar) {}
 
   loadOrders(): void {
     const startIndex = this.currentPage - 1;
     const endIndex = this.selectedPageSize;
-    this.ordersDbService.getOrdersApiChef(startIndex,endIndex).subscribe((orders:any) => {
-      const {totalElements,totalPages,content,size}=orders;
+    this.ordersDbService.getOrdersDateApi(startIndex, endIndex, 2024, 0, 0).subscribe((orders: any) => {
+
+      console.log(orders);
+
+      const { totalElements, totalPages, content, size } = orders;
       this.totalPages = totalPages;
-      this.totalEntities=totalElements;
-      this.selectedPageSize=size
+      this.totalEntities = totalElements;
+      this.selectedPageSize = size;
+
       this.orders = content.sort((a: Order, b: Order) => {
         const timeA = a.slot?.time ? a.slot?.time.split(':').map(Number) : [0, 0];
         const timeB = b.slot?.time ? b.slot?.time.split(':').map(Number) : [0, 0];
@@ -48,9 +57,37 @@ export class ChefPageComponent implements OnInit{
           return timeA[0] - timeB[0];
         } else {
           return timeA[1] - timeB[1];
+
         }
+
+        this.servOrder.getHistorialByUserId().subscribe({
+
+        })
+
+
+
       });
-    });
+      this.dataSource = new MatTableDataSource<Order>(this.orders);
+      console.log(this.dataSource.data);
+
+
+    // this.ordersDbService.getOrdersApiChef(startIndex, endIndex).subscribe((orders: any) => {
+    //   console.log(orders);
+    //   const {totalElements,totalPages,content,size}=orders;
+    //   this.totalPages = totalPages;
+    //   this.totalEntities=totalElements;
+    //   this.selectedPageSize=size
+    //   this.orders = content.sort((a: Order, b: Order) => {
+    //     const timeA = a.slot?.time ? a.slot?.time.split(':').map(Number) : [0, 0];
+    //     const timeB = b.slot?.time ? b.slot?.time.split(':').map(Number) : [0, 0];
+
+    //     if (timeA[0] !== timeB[0]) {
+    //       return timeA[0] - timeB[0];
+    //     } else {
+    //       return timeA[1] - timeB[1];
+    //     }
+    //   });
+     });
   }
 
   deleteOrder(orderId: number): void {

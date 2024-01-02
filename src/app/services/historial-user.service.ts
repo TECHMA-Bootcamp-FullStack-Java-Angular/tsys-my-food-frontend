@@ -23,4 +23,7 @@ export class HistorialUserService {
   getHistorialByUserId(): Observable<Order[]> {
     return this.hhtp.get<Order[]>(this.urlProd + this.urlHistorial + this.userID);
   }
+
+
+
 }

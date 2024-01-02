@@ -23,9 +23,15 @@
       <div class="card-header" [class.past-time]="isPastTime(order.slot?.time)">
         <span class="header-item"><i class="fas fa-utensils" style="margin-right: 10px;"></i>ID: {{ order.orderId}}</span>
         <span class="header-item"> <i class="fas fa-clock"></i> {{ order.slot?.time }}</span>
-        
+
       </div>
       <div class="card-content">
+        <div class="mx-auto text-center mt-4">
+          <p class="text-secondary">There is no information in Demo Version </p>
+          <img src="../../../assets/img/no-foto.png" alt="">
+
+        </div>
+
         <ul class="dish-list">
           @for (dish of order.dishes; track $index) {
           <li class="dish">{{ dish.name }}</li>}
